@@ -10,7 +10,7 @@ export async function fetchJson(
       headers,
     };
 
-    console.log("fetchJson, before fetch executing");
+    console.log("fetchJson, before fetch executing", { args0: args[0] });
     const response = await fetch(args[0], init);
     const data = await response.json();
 
@@ -36,15 +36,21 @@ export async function fetchJson(
   }
 }
 
-async function fetchFormData(url: string, body: FormData, headers?: any) {
+export async function fetchFormData(
+  url: string,
+  body: FormData,
+  headers?: any
+) {
   try {
-    const response = await fetch(`/${url}`, {
+    const response = await fetch(url, {
       body,
       method: "POST",
       headers,
     });
 
     const data = await response.json();
+
+    console.log({ data, url });
 
     if (response.ok) {
       return data;
@@ -55,8 +61,11 @@ async function fetchFormData(url: string, body: FormData, headers?: any) {
     error.data = data;
     error.status = response.status;
 
+    console.log({ error });
+
     throw error;
   } catch (error: any) {
+    console.log({ error });
     if (!error.data) {
       error.data = { message: error.message };
     }
@@ -70,7 +79,6 @@ export default class Api {
   }
 
   public static async post(url: string, body: any, headers?: any) {
-    console.log("post executed");
     return fetchJson(`/api/${url}`, {
       body: JSON.stringify(body),
       method: "POST",

@@ -51,7 +51,6 @@ export default function useMediaUpload() {
       return data;
     } catch (err) {
       setIsLoading(false);
-      console.log({ errrrrrrrrrrrrr: err });
       throw err;
     }
   };
