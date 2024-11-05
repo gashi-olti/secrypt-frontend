@@ -7,10 +7,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import useMediaUpload from "@/hooks/useMediaUpload";
 
 import FileUploadSuccess from "./FileUploadSuccess";
-import schema, { MediaUploadType } from "../MediaUpload/schema";
+import schema, { MediaType, MediaUploadType } from "../MediaUpload/schema";
 import FileUpload from "./FileUpload";
 import FileUploadForm from "./FileUploadForm";
 import { Button } from "../ui/button";
+import Backdrop from "../Backdrop";
 
 export type ViewTypes = "upload" | "form" | "upload-success";
 
@@ -20,7 +21,8 @@ export default function Home() {
 
   const defaultValues = React.useMemo<MediaUploadType>(
     () => ({
-      fileType: undefined,
+      file: undefined,
+      fileType: MediaType.IMAGE,
       maxDownloads: "1",
       ttl: "1 minute",
       password: "",
@@ -44,14 +46,17 @@ export default function Home() {
   const submitForm = async (values: MediaUploadType) => {
     try {
       const response = await uploadMedia(values);
-      console.log({ response });
+
+      if (response) {
+        setView("upload-success");
+      }
     } catch (err) {
       console.log({ err });
     }
   };
 
   return (
-    <>
+    <Backdrop isLoading={isLoading}>
       {(view === "upload" || view === "form") && (
         <FormProvider
           {...methods}
@@ -59,24 +64,28 @@ export default function Home() {
           reset={reset}
           handleSubmit={handleSubmit}
         >
-          {/* <form onSubmit={handleSubmit(submitForm)}> */}
           {view === "upload" && (
-            <FileUpload file={file} setFile={setFile} setView={setView} />
+            <FileUpload
+              name="file"
+              file={file}
+              setFile={setFile}
+              setView={setView}
+            />
           )}
           {view === "form" && (
-            <FileUploadForm file={file} setFile={setFile} setView={setView} />
+            <FileUploadForm file={file} setFile={setFile} setView={setView}>
+              <Button
+                type="submit"
+                tw="w-full bg-sky-700 hover:bg-sky-900"
+                onClick={handleSubmit(submitForm)}
+              >
+                Upload
+              </Button>
+            </FileUploadForm>
           )}
-          {/* </form> */}
-          <Button
-            type="submit"
-            tw="w-full bg-sky-700 hover:bg-sky-900"
-            onClick={handleSubmit(submitForm)}
-          >
-            Upload
-          </Button>
         </FormProvider>
       )}
       {view === "upload-success" && <FileUploadSuccess />}
-    </>
+    </Backdrop>
   );
 }

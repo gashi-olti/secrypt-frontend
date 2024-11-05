@@ -6,12 +6,13 @@ import MediaSingle from "../MediaUpload/MediaSingle";
 import { ViewTypes } from "./Home";
 
 type Props = {
+  name: string;
   file?: File;
   setFile: React.Dispatch<React.SetStateAction<File | undefined>>;
   setView: React.Dispatch<React.SetStateAction<ViewTypes>>;
 };
 
-export default function FileUpload({ setFile, setView }: Props) {
+export default function FileUpload({ name, setFile, setView }: Props) {
   return (
     <div tw="h-full max-w-screen-md mx-auto p-4 flex flex-col items-center">
       <div tw="grid grid-cols-1 gap-12 md:(gap-16) my-auto">
@@ -26,7 +27,7 @@ export default function FileUpload({ setFile, setView }: Props) {
           </div>
         </div>
         <div tw="col-span-full">
-          <MediaSingle name="fileUpload" setFile={setFile} setView={setView} />
+          <MediaSingle name={name} setFile={setFile} setView={setView} />
         </div>
       </div>
     </div>

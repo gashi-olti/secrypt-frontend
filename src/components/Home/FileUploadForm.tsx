@@ -11,9 +11,15 @@ type Props = {
   file?: File;
   setFile?: React.Dispatch<React.SetStateAction<File | undefined>>;
   setView: React.Dispatch<React.SetStateAction<ViewTypes>>;
+  children: React.ReactNode;
 };
 
-export default function FileUploadForm({ file, setFile, setView }: Props) {
+export default function FileUploadForm({
+  file,
+  setFile,
+  setView,
+  children,
+}: Props) {
   return (
     <div tw="max-w-screen-md mx-auto p-4 mt-12">
       <div tw="grid grid-cols-12 md:(grid-cols-12) gap-4">
@@ -27,7 +33,12 @@ export default function FileUploadForm({ file, setFile, setView }: Props) {
                 <TabsTrigger value="upload">Upload</TabsTrigger>
               </TabsList>
               <TabsContent value="upload">
-                <Form />
+                <div tw="grid grid-cols-12 gap-4">
+                  <div tw="col-span-12">
+                    <Form />
+                  </div>
+                  <div tw="col-span-12">{children}</div>
+                </div>
               </TabsContent>
             </Tabs>
           </div>
