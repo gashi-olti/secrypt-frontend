@@ -1,5 +1,5 @@
 import React from "react";
-import { useFormContext, useWatch } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 
 import DropZone from "./DropZone";
 import { ViewTypes } from "../Home/Home";
@@ -34,19 +34,7 @@ export default function MediaSingle({
   setFile,
   setView,
 }: Props) {
-  const [isLoading, setIsLoading] = React.useState(false);
-  // const [value, setValue] = React.useState<any>({});
-
-  const {
-    control,
-    setValue,
-    formState: { errors },
-  } = useFormContext<File>();
-
-  const item = useWatch({
-    name,
-    control,
-  });
+  const { setValue } = useFormContext<File>();
 
   const { toast } = useToast();
 
@@ -69,7 +57,8 @@ export default function MediaSingle({
       <DropZone
         accept={accept}
         onChange={addFile}
-        loading={isLoading}
+        // loading={isLoading}
+        loading={false}
         disabled={disabled}
       />
     </>

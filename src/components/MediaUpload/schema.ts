@@ -1,7 +1,17 @@
 import * as yup from "yup";
 
+export enum MediaType {
+  IMAGE = "IMAGE",
+  VIDEO = "VIDEO",
+  PDF = "PDF",
+  DOCUMENT = "DOCUMENT",
+  ARCHIVE = "ARCHIVE",
+  OTHER = "OTHER",
+}
+
 export interface MediaUploadType {
-  fileType?: File | undefined;
+  file?: File | undefined;
+  fileType: MediaType | string;
   maxDownloads?: number | string;
   ttl?: number | string;
   password?: string;
@@ -9,7 +19,11 @@ export interface MediaUploadType {
 
 const schema = () =>
   yup.object().shape({
-    fileType: yup.array().max(1, "Only one file upload is allowed"),
+    file: yup.mixed<File>().optional(),
+    fileType: yup
+      .mixed<MediaType>()
+      .oneOf(Object.values(MediaType), "Invalid file type")
+      .required("File type is required"),
     maxDownloads: yup.string(),
     // .number()
     // .min(1, "You can select min of 3 downloads")

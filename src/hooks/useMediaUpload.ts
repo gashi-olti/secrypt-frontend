@@ -17,7 +17,13 @@ export default function useMediaUpload() {
     }
     if (body.ttl) {
       const [value, type] = (body.ttl as string)?.split(" ");
-      body.ttl = toMilliseconds({ value: Number(value), type: type as any });
+      body.ttl = toMilliseconds({
+        value: Number(value),
+        type: type as any,
+      });
+    }
+    if (body.fileType) {
+      body.fileType = body.fileType.toString();
     }
 
     return body;
@@ -30,20 +36,19 @@ export default function useMediaUpload() {
       const formData = new FormData();
       const transformedData = { ...transformBody(body) };
 
-      Object.keys(transformedData).forEach((key) => {
-        const typedKey = key as keyof typeof transformedData;
-        if (key === "fileType") {
-          const file = transformedData.fileType;
+      for (const dataKey in transformedData) {
+        if (dataKey === "file") {
+          const file = transformedData.file;
           if (file) {
-            formData.append("fileType", file, file?.name);
+            formData.append("files", file);
           }
+        } else {
+          const typedKey = dataKey as keyof typeof transformedData;
+          formData.append(dataKey, transformedData[typedKey] as string);
         }
+      }
 
-        formData.append(key, transformedData[typedKey] as string);
-        return;
-      });
-
-      const data: any = await Api.post("files/upload", formData);
+      const data: any = await Api.upload("files/upload", formData);
 
       toast({ description: "File successfully uploaded" });
       setIsLoading(false);
