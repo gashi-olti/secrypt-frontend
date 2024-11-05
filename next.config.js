@@ -3,7 +3,7 @@ import withTwin from "./withTwin.mjs";
 export default withTwin({
   reactStrictMode: true,
   serverRuntimeConfig: {
-    backendUrl: process.env.BACKEND_URL || "http://127.0.0.1:3333",
+    backendUrl: process.env.BACKEND_URL,
   },
   env: {
     BUILD_ENV: process.env.BUILD_ENV,
