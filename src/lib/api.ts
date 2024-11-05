@@ -10,11 +10,8 @@ export async function fetchJson(
       headers,
     };
 
-    console.log("fetchJson, before fetch executing", { args0: args[0] });
     const response = await fetch(args[0], init);
     const data = await response.json();
-
-    console.log({ data, response });
 
     if (response.ok) {
       return data;
@@ -24,8 +21,6 @@ export async function fetchJson(
     error.response = response;
     error.data = data;
     error.status = response.status;
-
-    console.log({ error });
 
     throw error;
   } catch (error: any) {
@@ -42,15 +37,13 @@ export async function fetchFormData(
   headers?: any
 ) {
   try {
-    const response = await fetch(url, {
+    const response = await fetch(`/api/${url}`, {
       body,
       method: "POST",
       headers,
     });
 
     const data = await response.json();
-
-    console.log({ data, url });
 
     if (response.ok) {
       return data;
@@ -61,11 +54,8 @@ export async function fetchFormData(
     error.data = data;
     error.status = response.status;
 
-    console.log({ error });
-
     throw error;
   } catch (error: any) {
-    console.log({ error });
     if (!error.data) {
       error.data = { message: error.message };
     }
