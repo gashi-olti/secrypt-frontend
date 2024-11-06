@@ -23,8 +23,8 @@ export default function Home() {
     () => ({
       file: undefined,
       fileType: MediaType.IMAGE,
-      maxDownloads: "1",
-      ttl: "1 minute",
+      maxDownloads: "3",
+      ttl: "2 minutes",
       password: "",
     }),
     []
@@ -56,7 +56,7 @@ export default function Home() {
   };
 
   return (
-    <Backdrop isLoading={isLoading}>
+    <Backdrop isLoading={isLoading} description="Your file is uploading...">
       {(view === "upload" || view === "form") && (
         <FormProvider
           {...methods}

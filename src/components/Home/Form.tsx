@@ -25,7 +25,7 @@ type TtlType = {
 };
 
 const ttlValues: TtlType[] = [
-  { value: "1 minute", label: "1 minute", type: "minutes" },
+  { value: "2 minutes", label: "2 minutes", type: "minutes" },
   { value: "5 minutes", label: "5 minutes", type: "minutes" },
   { value: "30 minutes", label: "30 minutes", type: "minutes" },
   { value: "1 hour", label: "1 hour", type: "hours" },
@@ -57,7 +57,7 @@ export default function Form() {
                     <SelectValue placeholder="Select a number" />
                   </SelectTrigger>
                   <SelectContent>
-                    {["1", "5", "10", "25", "50"].map((number) => (
+                    {["3", "10", "20", "30", "50"].map((number) => (
                       <SelectItem value={number} key={number}>
                         {number}
                       </SelectItem>
