@@ -1,6 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import tw from "twin.macro";
 import { useFormContext } from "react-hook-form";
+import { Info } from "lucide-react";
 
 import {
   FormControl,
@@ -17,6 +18,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import CustomTooltip from "../Common/CustomTooltip";
 
 type TtlType = {
   value: string;
@@ -44,7 +46,7 @@ export default function Form() {
           control={control}
           name="maxDownloads"
           render={({ field }) => (
-            <FormItem tw="space-y-0 text-slate-600">
+            <FormItem tw="space-y-1 text-slate-600">
               <FormLabel>Max. Downloads</FormLabel>
               <FormControl>
                 <Select
@@ -75,7 +77,7 @@ export default function Form() {
           control={control}
           name="ttl"
           render={({ field }) => (
-            <FormItem tw="space-y-0 text-slate-600">
+            <FormItem tw="space-y-1 text-slate-600">
               <FormLabel>Expires After:</FormLabel>
               <FormControl>
                 <Select
@@ -106,8 +108,18 @@ export default function Form() {
           control={control}
           name="password"
           render={({ field }) => (
-            <FormItem tw="space-y-0 text-slate-600">
-              <FormLabel>Password</FormLabel>
+            <FormItem tw="space-y-1 text-slate-600">
+              <FormLabel>
+                <div tw="w-full flex flex-row justify-between items-center pr-1">
+                  Password
+                  <CustomTooltip
+                    title="Protect your sharing with a password"
+                    delayDuration={200}
+                  >
+                    <Info size={16} />
+                  </CustomTooltip>
+                </div>
+              </FormLabel>
               <FormControl>
                 <Input placeholder="Password..." type="password" {...field} />
               </FormControl>
@@ -116,11 +128,6 @@ export default function Form() {
           )}
         />
       </div>
-      {/* <div tw="col-span-full">
-        <Button type="submit" tw="w-full bg-sky-700 hover:bg-sky-900">
-          Send
-        </Button>
-      </div> */}
     </div>
   );
 }
