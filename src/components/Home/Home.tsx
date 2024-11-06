@@ -18,6 +18,7 @@ export type ViewTypes = "upload" | "form" | "upload-success";
 export default function Home() {
   const [view, setView] = React.useState<ViewTypes>("upload");
   const [file, setFile] = React.useState<File | undefined>(undefined);
+  const [nanoId, setNanoId] = React.useState<string>("");
 
   const defaultValues = React.useMemo<MediaUploadType>(
     () => ({
@@ -48,6 +49,7 @@ export default function Home() {
       const response = await uploadMedia(values);
 
       if (response) {
+        setNanoId(response?.nanoID);
         setView("upload-success");
       }
     } catch (err) {
@@ -85,7 +87,7 @@ export default function Home() {
           )}
         </FormProvider>
       )}
-      {view === "upload-success" && <FileUploadSuccess />}
+      {view === "upload-success" && <FileUploadSuccess nanoId={nanoId} />}
     </Backdrop>
   );
 }
