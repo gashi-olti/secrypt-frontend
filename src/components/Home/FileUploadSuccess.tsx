@@ -51,7 +51,7 @@ export default function FileUploadSuccess({ nanoId }: Props) {
           like.
         </p>
         <div tw="w-full flex flex-row justify-between items-center space-x-2 bg-blue-100 rounded-md p-2">
-          <span tw="ml-2 text-gray-800 line-clamp-1">{`secrypt/${nanoId}`}</span>
+          <span tw="ml-2 text-left text-sm text-gray-800 line-clamp-1">{`secrypt/${nanoId}`}</span>
 
           <CustomTooltip title="Copy to clipboard">
             <Button
