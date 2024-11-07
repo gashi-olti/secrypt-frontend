@@ -18,7 +18,7 @@ export default function FileUploadSuccess({ nanoId }: Props) {
   const { toast } = useToast();
 
   const handleCopyToClipboard = async () => {
-    await navigator.clipboard.writeText(`/${nanoId}` as any);
+    await navigator.clipboard.writeText(nanoId as any);
 
     setCopied(true);
     toast({ description: "Copied to clipboard!" });
