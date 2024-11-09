@@ -43,7 +43,19 @@ export async function fetchFormData(
       headers,
     });
 
-    const data = await response.json();
+    const contentType = response.headers.get("content-type");
+
+    let data;
+
+    if (contentType && contentType.includes("application/json")) {
+      data = await response.json();
+    } else if (contentType && contentType.includes("text/plain")) {
+      data = await response.text();
+    } else if (contentType && contentType.includes("text/html")) {
+      data = await response.text();
+    } else {
+      throw new Error("Unsupported response format");
+    }
 
     if (response.ok) {
       return data;
