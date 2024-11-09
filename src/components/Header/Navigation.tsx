@@ -7,7 +7,7 @@ type NavLinkProps = {
 };
 
 const NavLink = styled(Link)<NavLinkProps>(({ active }) => [
-  tw`inline-block relative md:(mx-2 my-0)`,
+  tw`inline-block relative mx-2 md:( my-0)`,
   !active && tw`hover:border-b-2`,
   active && tw`border-b-2`,
 ]);
