@@ -32,7 +32,7 @@ type Props = {
 };
 
 export default function DropZone({
-  accept = "image/jpeg, image/png, image/tiff",
+  accept,
   loading = false,
   disabled = false,
   onChange,
@@ -51,12 +51,6 @@ export default function DropZone({
     const { files } = event.dataTransfer;
 
     if (files.length) {
-      if (!accept.includes(files[0].type)) {
-        // openSnackbar(t("media:file type not allowed"), "error");
-        setDropzoneHover(false);
-        return;
-      }
-
       onChange(files);
     }
 
@@ -115,14 +109,14 @@ export default function DropZone({
         <Button
           variant="outline"
           size="icon"
-          tw="w-16 h-16 rounded-full border-none shadow-lg text-gray-600"
+          tw="w-16 h-16 bg-gray-200 rounded-full border-none shadow-lg text-gray-600 hover:(bg-gray-300 text-gray-600)"
           onClick={openFileSelection}
           disabled={disableDropZone}
         >
           <CircleArrowUp />
         </Button>
         <h2 tw="text-3xl font-semibold text-slate-700">{`Drop like it's hot!`}</h2>
-        <p tw="text-gray-500">No size limit</p>
+        <p tw="text-gray-500">Up to 1.5GB</p>
       </DropAreaInner>
       <input
         accept={accept}

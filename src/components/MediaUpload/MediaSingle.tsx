@@ -4,6 +4,7 @@ import { useFormContext } from "react-hook-form";
 import DropZone from "./DropZone";
 import { ViewTypes } from "../Home/Home";
 import { useToast } from "@/hooks/use-toast";
+import { fileTypes } from "@/utils/fileFunctions";
 
 type Props = {
   accept?: string;
@@ -15,8 +16,10 @@ type Props = {
 
 export default function MediaSingle({
   accept = `
-    image/*,
-    video/*,
+    image/jpeg, 
+    image/png,
+    video/mp4,
+    audio/mpeg,
     application/pdf,
     application/msword,
     application/vnd.openxmlformats-officedocument.wordprocessingml.document,
@@ -42,6 +45,12 @@ export default function MediaSingle({
     async (files: FileList) => {
       if (files.length) {
         const file = files[0];
+
+        if (!fileTypes.includes(file?.type)) {
+          toast({ description: "File type not allowed!" });
+          return;
+        }
+
         setValue(name as any, file);
         setFile(file);
         setView("form");

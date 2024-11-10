@@ -1,7 +1,7 @@
 import React from "react";
 
 import Api from "@/lib/api";
-import { MediaUploadType } from "@/components/MediaUpload/schema";
+import { MediaType, MediaUploadType } from "@/components/MediaUpload/schema";
 import { toMilliseconds } from "@/utils/functions";
 
 import { useToast } from "./use-toast";
@@ -22,8 +22,22 @@ export default function useMediaUpload() {
         type: type as any,
       });
     }
-    if (body.fileType) {
-      body.fileType = body.fileType.toString();
+    if (body.fileType && body.file) {
+      if (body.file.type.includes("image")) {
+        body.fileType = MediaType.IMAGE;
+      }
+      if (
+        body.file.type.includes("audio") ||
+        body.file.type.includes("video")
+      ) {
+        body.fileType = MediaType.VIDEO;
+      }
+      if (body.file.type.includes("application")) {
+        body.fileType = MediaType.DOCUMENT;
+      }
+      if (body.file.type.includes("pdf")) {
+        body.fileType = MediaType.PDF;
+      }
     }
 
     return body;

@@ -49,7 +49,9 @@ export default function Home() {
       const response = await uploadMedia(values);
 
       if (response) {
-        setNanoId(response?.nanoID);
+        const nanoId = response?.substring(response.lastIndexOf("/") + 1);
+
+        setNanoId(nanoId);
         setView("upload-success");
       }
     } catch (err) {
