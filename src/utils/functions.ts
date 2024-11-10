@@ -1,3 +1,6 @@
+import { Images } from "@/components/Icons/Images";
+import { MediaType } from "@/components/MediaUpload/schema";
+
 /**
  * Format bytes as human-readable text.
  *
@@ -47,4 +50,76 @@ export function toMilliseconds({
   }
 
   return 0;
+}
+
+export function toHours({ milliseconds = 0 }: { milliseconds: number }) {
+  return milliseconds / 3600000;
+}
+
+export function formatReadableDateTime(date: Date) {
+  return date.toLocaleString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  });
+}
+
+export function getRemainingTime({
+  ms,
+  createdAt,
+}: {
+  ms: number;
+  createdAt: Date;
+}) {
+  const createdAtTime = new Date(createdAt).getTime();
+  const currentTime = Date.now();
+  const timeElapsed = currentTime - createdAtTime;
+  const timeRemaining = ms - timeElapsed;
+
+  if (timeRemaining <= 0) {
+    return null;
+  }
+
+  const hours = String(Math.floor(timeRemaining / (1000 * 60 * 60))).padStart(
+    2,
+    "0"
+  );
+  const minutes = String(
+    Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60))
+  ).padStart(2, "0");
+  const seconds = String(
+    Math.floor((timeRemaining % (1000 * 60)) / 1000)
+  ).padStart(2, "0");
+
+  return {
+    hours,
+    minutes,
+    seconds,
+  };
+}
+
+export function retrieveImage({ type }: { type: MediaType }) {
+  let image = null;
+
+  switch (type) {
+    case MediaType.IMAGE:
+      image = Images.ImageIcon;
+      break;
+    case MediaType.DOCUMENT:
+      image = Images.DocIcon;
+      break;
+    case MediaType.VIDEO:
+      image = Images.VideoIcon;
+      break;
+    case MediaType.PDF:
+      image = Images.PdfIcon;
+      break;
+    default:
+      image = Images.DocIcon;
+  }
+
+  return image;
 }
