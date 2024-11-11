@@ -57,7 +57,7 @@ export default function FileUploadSuccess({ nanoId }: Props) {
             <Button
               variant="ghost"
               size="icon"
-              tw="rounded-full text-blue-600"
+              tw="rounded-full text-blue-600 hover:(bg-blue-200)"
               onClick={handleCopyToClipboard}
             >
               <Copy />
