@@ -11,7 +11,7 @@ export default function File() {
   const { file } = useFile();
 
   return (
-    <div tw="max-w-screen-md h-full flex flex-col items-center mx-auto p-4">
+    <div tw="max-w-screen-md h-full flex flex-col items-center mx-auto p-2 md:p-4">
       <div tw="w-full grid grid-cols-12 m-auto">
         {!file && (
           <div tw="col-span-12">
