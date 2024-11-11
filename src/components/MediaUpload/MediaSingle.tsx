@@ -45,9 +45,15 @@ export default function MediaSingle({
     async (files: FileList) => {
       if (files.length) {
         const file = files[0];
+        const maxSize = 1.5 * 1024 * 1024 * 1024;
 
         if (!fileTypes.includes(file?.type)) {
           toast({ description: "File type not allowed!" });
+          return;
+        }
+
+        if (file.size > maxSize) {
+          toast({ description: "The file size should not exceed 1.5 GB." });
           return;
         }
 
