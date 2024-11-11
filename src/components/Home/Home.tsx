@@ -80,7 +80,7 @@ export default function Home() {
             <FileUploadForm file={file} setFile={setFile} setView={setView}>
               <Button
                 type="submit"
-                tw="w-full bg-sky-700 hover:bg-sky-900"
+                tw="w-full text-white bg-sky-700 hover:bg-sky-900"
                 onClick={handleSubmit(submitForm)}
               >
                 Upload

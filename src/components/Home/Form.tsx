@@ -55,12 +55,16 @@ export default function Form() {
                   value={field.value}
                   onValueChange={(value) => field.onChange(value)}
                 >
-                  <SelectTrigger className="w-full">
+                  <SelectTrigger tw="w-full bg-white border-gray-200 focus:(ring-offset-0)">
                     <SelectValue placeholder="Select a number" />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent tw="bg-white text-gray-600">
                     {["3", "10", "20", "30", "50"].map((number) => (
-                      <SelectItem value={number} key={number}>
+                      <SelectItem
+                        value={number}
+                        key={number}
+                        tw="hover:(bg-gray-200 text-gray-600 cursor-pointer) data-[state=checked]:(bg-gray-200 text-gray-700)"
+                      >
                         {number}
                       </SelectItem>
                     ))}
@@ -86,12 +90,16 @@ export default function Form() {
                   value={field.value}
                   onValueChange={(value) => field.onChange(value)}
                 >
-                  <SelectTrigger className="w-full">
+                  <SelectTrigger tw="w-full bg-white border-gray-200 focus:(ring-offset-0)">
                     <SelectValue placeholder="Select a number" />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent tw="bg-white text-gray-600">
                     {ttlValues.map((item, i) => (
-                      <SelectItem value={item.value} key={i}>
+                      <SelectItem
+                        value={item.value}
+                        key={i}
+                        tw="hover:(bg-gray-200 text-gray-600 cursor-pointer) data-[state=checked]:(bg-gray-200 text-gray-700)"
+                      >
                         {item.label}
                       </SelectItem>
                     ))}
@@ -121,7 +129,12 @@ export default function Form() {
                 </div>
               </FormLabel>
               <FormControl>
-                <Input placeholder="Password..." type="password" {...field} />
+                <Input
+                  placeholder="Password..."
+                  type="password"
+                  {...field}
+                  tw="w-full bg-white border-gray-200 focus:(ring-offset-0)"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
