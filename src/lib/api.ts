@@ -75,6 +75,40 @@ export async function fetchFormData(
   }
 }
 
+export async function fetchFile(
+  ...args: [input: RequestInfo, init?: RequestInit]
+) {
+  try {
+    const headers: HeadersInit = new Headers(args[1]?.headers);
+
+    const init = {
+      ...(args[1] && { ...args[1] }),
+      headers,
+    };
+
+    console.log({ init });
+
+    const response = await fetch(args[0], init);
+
+    console.log({ response });
+
+    if (!response.ok) {
+      const error: any = new Error(response.statusText);
+      error.response = response;
+      error.status = response.status;
+
+      throw error;
+    }
+
+    return response;
+  } catch (error: any) {
+    if (!error.data) {
+      error.data = { message: error.message };
+    }
+    throw error;
+  }
+}
+
 export default class Api {
   public static async get(url: string) {
     return fetchJson(`/api/${url}`);
@@ -90,5 +124,10 @@ export default class Api {
 
   public static async upload(url: string, body: FormData, headers?: Headers) {
     return fetchFormData(url, body, headers);
+  }
+
+  public static async download(url: string) {
+    const response = await fetchFile(`/api/${url}`);
+    return response;
   }
 }
