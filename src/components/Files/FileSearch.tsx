@@ -9,6 +9,7 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import Backdrop from "../Backdrop";
 import { useFile } from "./FileProvier";
+import useFormErrors from "@/hooks/useFormErrors";
 
 export default function FileSearch() {
   const [link, setLink] = React.useState("");
@@ -16,23 +17,29 @@ export default function FileSearch() {
   const { setNano, setFile } = useFile();
   const { searchFile, getFile, isLoading } = useFiles();
 
+  const { handleErrors } = useFormErrors<any>();
+
   const onChange = (e: any) => {
     setLink(e.target.value);
   };
 
   const submit = async () => {
-    const nano = await searchFile(link);
+    try {
+      const nano = await searchFile(link);
 
-    if (nano && setNano) {
-      setNano(nano);
+      if (nano && setNano) {
+        setNano(nano);
 
-      if (!nano.hasPassword) {
-        const file = await getFile(nano.id as string);
+        if (!nano.hasPassword) {
+          const file = await getFile(nano.id as string);
 
-        if (file) {
-          setFile(file);
+          if (file) {
+            setFile(file);
+          }
         }
       }
+    } catch (err) {
+      handleErrors(err);
     }
   };
 
@@ -48,6 +55,7 @@ export default function FileSearch() {
         <Button
           size="lg"
           tw="h-16 text-gray-200 bg-blue-600 rounded-tl-none rounded-bl-none hover:(bg-blue-700)"
+          disabled={!link}
           onClick={submit}
         >
           <Search />
