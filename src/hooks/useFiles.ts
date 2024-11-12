@@ -43,9 +43,26 @@ export default function useFiles() {
     }
   };
 
+  const downloadFile = async (id: string) => {
+    setIsLoading(true);
+    try {
+      const response = await Api.download(`files/download/${id}`);
+
+      const data = await response.blob();
+
+      if (!(data instanceof Blob)) return;
+
+      console.log({ data });
+    } catch (error) {
+      setIsLoading(false);
+      throw error;
+    }
+  };
+
   return {
     searchFile,
     getFile,
+    downloadFile,
     isLoading,
   };
 }

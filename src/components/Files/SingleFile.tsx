@@ -9,9 +9,16 @@ import FileCountdown from "./FileCountdown";
 import { Separator } from "../ui/separator";
 import FileHero from "./FileHero";
 import FileDetails from "./FileDetails";
+import useFiles from "@/hooks/useFiles";
 
 export default function SingleFile() {
   const { file } = useFile();
+
+  const { downloadFile } = useFiles();
+
+  const exportFile = () => {
+    downloadFile(file?.fileId as string);
+  };
 
   return (
     <div tw="bg-gray-50 px-4 py-6 rounded-xl flex flex-col md:(flex-row p-10)">
@@ -41,6 +48,7 @@ export default function SingleFile() {
                 variant="secondary"
                 disabled={file?.downloadCount === 0}
                 tw="w-full uppercase"
+                onClick={exportFile}
               >
                 <Download />
                 Download
