@@ -57,17 +57,13 @@ export default function MediaItem({ file, setFile, setView }: Props) {
                 <CircleX size={20} tw="text-red-500" />
               </AlertDialogTrigger>
               <AlertDialogContent>
-                <AlertDialogTitle tw="text-slate-700">
-                  Remove uploaded file?
-                </AlertDialogTitle>
+                <AlertDialogTitle>Remove uploaded file?</AlertDialogTitle>
                 <AlertDialogDescription>
                   Do you wish to remove uploaded file? If you remove it, you
                   will have to reupload it again.
                 </AlertDialogDescription>
                 <AlertDialogFooter>
-                  <AlertDialogCancel tw="text-gray-500">
-                    Cancel
-                  </AlertDialogCancel>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
                   <AlertDialogAction onClick={onRemoveFile}>
                     Ok
                   </AlertDialogAction>
