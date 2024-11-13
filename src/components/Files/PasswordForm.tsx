@@ -9,9 +9,10 @@ import useFiles from "@/hooks/useFiles";
 import { FileModel } from "@/interfaces/file.interface";
 
 import { Button } from "../ui/button";
-import { FormField, FormItem, FormLabel } from "../ui/form";
+import { FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { Input } from "../ui/input";
 import { useFile } from "./FileProvier";
+import useFormErrors from "@/hooks/useFormErrors";
 
 const schema = () =>
   yup.object().shape({
@@ -44,6 +45,8 @@ export default function PasswordForm({ onCancel, onFileAccess }: Props) {
     defaultValues,
   });
 
+  const { handleErrors } = useFormErrors<any>(methods.setError, "password");
+
   const handleCancel = () => {
     if (onCancel) {
       onCancel();
@@ -51,14 +54,18 @@ export default function PasswordForm({ onCancel, onFileAccess }: Props) {
   };
 
   const submitForm = async (data: any) => {
-    const response = await getFile(nano?.id as string, data?.password);
+    try {
+      const response = await getFile(nano?.id as string, data?.password);
 
-    if (response) {
-      setFile(response);
+      if (response) {
+        setFile(response);
 
-      if (onFileAccess) {
-        onFileAccess(response);
+        if (onFileAccess) {
+          onFileAccess(response);
+        }
       }
+    } catch (error) {
+      handleErrors(error);
     }
   };
 
@@ -73,10 +80,11 @@ export default function PasswordForm({ onCancel, onFileAccess }: Props) {
               <FormItem>
                 <FormLabel>Password</FormLabel>
                 <Input
-                  {...field}
                   placeholder="Password..."
                   disabled={isLoading}
+                  {...field}
                 />
+                <FormMessage />
               </FormItem>
             )}
           />
