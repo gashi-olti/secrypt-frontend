@@ -6,10 +6,12 @@ type NavLinkProps = {
   active?: boolean;
 };
 
-const NavLink = styled(Link)<NavLinkProps>(({ active }) => [
+const NavLink = styled(Link).withConfig({
+  shouldForwardProp: (prop) => prop !== "active",
+})<NavLinkProps>(({ active }) => [
   tw`inline-block relative mx-2 md:( my-0)`,
-  !active && tw`hover:border-b-2`,
-  active && tw`border-b-2`,
+  !active ? tw`hover:border-b-2` : "",
+  active ? tw`border-b-2` : "",
 ]);
 
 export default function Navigation() {
@@ -17,10 +19,13 @@ export default function Navigation() {
 
   return (
     <nav tw="uppercase font-semibold text-sm">
-      <NavLink href="/" active={router.pathname === "/"}>
+      <NavLink href="/" active={router.pathname === "/" ? true : undefined}>
         Home
       </NavLink>
-      <NavLink href="/files" active={router.pathname === "/files"}>
+      <NavLink
+        href="/files"
+        active={router.pathname === "/files" ? true : undefined}
+      >
         Files
       </NavLink>
     </nav>

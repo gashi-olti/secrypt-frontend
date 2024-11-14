@@ -10,7 +10,9 @@ type StyledElement = {
   disabled?: boolean;
 };
 
-const DropArea = styled.div<StyledElement>(({ hover, disabled }) => [
+const DropArea = styled("div").withConfig({
+  shouldForwardProp: (prop) => prop !== "hover",
+})<StyledElement>(({ hover, disabled }) => [
   tw`relative w-full flex flex-col items-center justify-center`,
   tw`w-full h-full p-4 rounded-2xl border-gray-300 border-4 border-dashed transition ease-in-out delay-100 duration-300`,
   hover ? tw`-translate-y-1 scale-105` : tw`scale-100`,
@@ -18,7 +20,9 @@ const DropArea = styled.div<StyledElement>(({ hover, disabled }) => [
   disabled && tw`opacity-50`,
 ]);
 
-const DropAreaInner = styled.div<StyledElement>(({ hover }) => [
+const DropAreaInner = styled("div").withConfig({
+  shouldForwardProp: (prop) => prop !== "hover",
+})<StyledElement>(({ hover }) => [
   tw`bg-slate-50 relative w-full m-auto flex flex-col items-center justify-center space-y-4 text-center`,
   tw`w-full h-full p-20 rounded-2xl transition ease-in-out delay-100 duration-300`,
   hover ? tw`-translate-y-1 scale-105 ` : tw`scale-100`,
