@@ -64,7 +64,7 @@ export default function useMediaUpload() {
 
       const data: any = await Api.upload("files/upload", formData);
 
-      toast({ description: "File successfully uploaded" });
+      toast({ type: "success", description: "File successfully uploaded." });
       setIsLoading(false);
 
       return data;

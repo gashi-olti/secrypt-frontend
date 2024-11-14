@@ -34,7 +34,10 @@ export default function useFiles() {
       );
 
       setIsLoading(false);
-      toast({ description: "Successfully retrieved the file." });
+      toast({
+        description: "Successfully retrieved the file.",
+        type: "success",
+      });
 
       return response;
     } catch (err) {

@@ -34,6 +34,7 @@ export default function MediaItem({ file, setFile, setView }: Props) {
       setFile(undefined);
       setView("upload");
       toast({
+        type: "success",
         description: "File successfully removed.",
       });
     }
