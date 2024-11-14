@@ -5,17 +5,20 @@ import * as React from "react";
 
 import type { ToastActionElement, ToastProps } from "@/components/ui/toast";
 
+type ToastType = "success" | "info" | "warning" | "error";
+
 const TOAST_LIMIT = 1;
 const TOAST_REMOVE_DELAY = 1000000;
 
 type ToasterToast = Omit<
   ToastProps,
-  "id" | "title" | "description" | "action"
+  "id" | "title" | "description" | "action" | "type"
 > & {
   id: string;
   title?: React.ReactNode;
   description?: React.ReactNode;
   action?: ToastActionElement;
+  type?: ToastType;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
