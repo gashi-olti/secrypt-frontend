@@ -8,19 +8,19 @@ const foreground = "#ededed";
 const CustomStyles = createGlobalStyle`
     @font-face {
         font-family: "SFR-Pro";
-        src: url("../pages/fonts/SFR-Pro-Regular.ttf");
+        src: url("/fonts/SFR-Pro-Regular.ttf");
         font-weight: normal;
         font-style: normal;
     }
     @font-face {
         font-family: "SFR-Pro";
-        src: url("../pages/fonts/SFR-Pro-Medium.ttf");
+        src: url("/fonts/SFR-Pro-Medium.ttf");
         font-weight: 600;
         font-style: normal;
     }
     @font-face {
         font-family: "SFR-Pro";
-        src: url("../pages/fonts/SFR-Pro-Bold.ttf");
+        src: url("/fonts/SFR-Pro-Bold.ttf");
         font-weight: bold;
         font-style: normal;
     }
