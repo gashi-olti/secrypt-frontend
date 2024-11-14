@@ -2,8 +2,6 @@
 import tw from "twin.macro";
 import React from "react";
 
-// import { useToast } from "@/hooks/use-toast";
-
 import {
   Dialog,
   DialogContent,
@@ -18,7 +16,6 @@ export default function PasswordDialog() {
   const [open, setOpen] = React.useState(false);
 
   const { nano, file } = useFile();
-  // const { toast } = useToast();
 
   const handleCancel = () => {
     setOpen(false);
@@ -26,7 +23,6 @@ export default function PasswordDialog() {
 
   const handleFileAccessSuccess = (response: any) => {
     if (response) {
-      // toast({ description: "Successfully retrieved the file" });
       setOpen(false);
     }
   };
@@ -40,7 +36,6 @@ export default function PasswordDialog() {
 
   return (
     <Dialog open={open}>
-      {/* <DialogTrigger>Open</DialogTrigger> */}
       <DialogContent hideCloseButton>
         <DialogHeader>
           <DialogTitle>Protected File</DialogTitle>

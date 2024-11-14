@@ -27,7 +27,7 @@ export default function FileCountdown() {
         setRemainingTime(time ?? undefined);
       }, 1000);
 
-      return () => clearInterval(interval); // Clean up the interval on component unmount
+      return () => clearInterval(interval);
     }
   }, [file]);
 
@@ -36,12 +36,12 @@ export default function FileCountdown() {
       {remainingTime && (
         <div tw="w-full rounded-sm flex flex-row items-center gap-4">
           <div tw="w-full flex flex-row justify-center gap-6">
-            <div tw="w-full flex flex-col items-center rounded-md bg-black/80 px-6 py-3">
+            <div tw="w-full flex flex-col items-center rounded-md bg-black/80 px-6 py-4">
               <span tw="text-3xl font-semibold">{remainingTime?.hours}</span>
               <span tw="text-sm">Hours</span>
             </div>
             <div
-              tw="w-full flex flex-col items-center rounded-md  px-6 py-3"
+              tw="w-full flex flex-col items-center rounded-md  px-6 py-4"
               css={[fileStyle?.backgroundColor]}
             >
               <span tw="text-3xl font-semibold text-gray-700">
@@ -49,7 +49,7 @@ export default function FileCountdown() {
               </span>
               <span tw="text-gray-700 text-sm">Mins</span>
             </div>
-            <div tw="w-full flex flex-col items-center rounded-md bg-black/80 px-6 py-3">
+            <div tw="w-full flex flex-col items-center rounded-md bg-black/80 px-6 py-4">
               <span tw="text-3xl font-semibold">{remainingTime?.seconds}</span>
               <span tw="text-sm">Sec</span>
             </div>

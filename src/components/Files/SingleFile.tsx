@@ -29,7 +29,7 @@ export default function SingleFile() {
         <div tw="col-span-12 md:col-span-8">
           <div tw="grid grid-cols-12 space-y-8">
             <div tw="col-span-12">
-              <h2 tw="text-2xl font-semibold text-gray-700 whitespace-normal break-words">
+              <h2 tw="text-3xl font-bold text-gray-700 whitespace-normal break-words">
                 {file?.fileName}
               </h2>
             </div>
