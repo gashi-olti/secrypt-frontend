@@ -45,7 +45,10 @@ export default function PasswordForm({ onCancel, onFileAccess }: Props) {
     defaultValues,
   });
 
-  const { handleErrors } = useFormErrors<any>(methods.setError, "password");
+  const { handleErrors } = useFormErrors<{ password: string }>(
+    methods.setError,
+    "password"
+  );
 
   const handleCancel = () => {
     if (onCancel) {
