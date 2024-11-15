@@ -52,8 +52,25 @@ export function toMilliseconds({
   return 0;
 }
 
-export function toHours({ milliseconds = 0 }: { milliseconds: number }) {
-  return milliseconds / 3600000;
+export function msToTime({ milliseconds = 0 }: { milliseconds: number }) {
+  let seconds = (milliseconds / 1000).toFixed(0);
+  let minutes = Math.floor(Number(seconds) / 60);
+  let hours = "";
+
+  if (minutes > 59) {
+    hours = Math.floor(minutes / 60).toString();
+    hours = Number(hours) >= 10 ? hours : "0" + hours;
+    minutes = minutes - Number(hours) * 60;
+    minutes = (minutes >= 10 ? minutes : "0" + minutes) as number;
+  }
+
+  seconds = Math.floor(Number(seconds) % 60).toString();
+  seconds = Number(seconds) >= 10 ? seconds : "0" + seconds;
+
+  if (hours != "") {
+    return hours + ":" + minutes + ":" + seconds;
+  }
+  return minutes + ":" + seconds;
 }
 
 export function formatReadableDateTime(date: Date) {

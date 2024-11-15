@@ -8,7 +8,7 @@ import {
   Hourglass,
 } from "lucide-react";
 
-import { formatReadableDateTime, toHours } from "@/utils/functions";
+import { formatReadableDateTime, msToTime } from "@/utils/functions";
 import { useFile } from "./FileProvier";
 
 type FileDetailsType = {
@@ -34,7 +34,7 @@ const Details = ({ icon, text, value, type }: FileDetailsType) => {
           {type === "size"
             ? `${value} MB`
             : type === "duration"
-            ? `${toHours({ milliseconds: value })} hours`
+            ? `${msToTime({ milliseconds: value })}`
             : type === "Date"
             ? formatReadableDateTime(new Date(value))
             : value}
