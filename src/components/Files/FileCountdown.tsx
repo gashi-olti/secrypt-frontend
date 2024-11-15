@@ -3,6 +3,7 @@ import tw from "twin.macro";
 import React, { useEffect } from "react";
 
 import { getRemainingTime } from "@/utils/functions";
+
 import { useFile } from "./FileProvier";
 
 type RemainingTime = {
@@ -18,13 +19,18 @@ export default function FileCountdown() {
 
   useEffect(() => {
     if (file) {
+      const time = getRemainingTime({
+        ms: file.ttl,
+        createdAt: new Date(file.uploadedAt),
+      });
+      setRemainingTime(time ?? undefined);
+
       const interval = setInterval(() => {
-        const time = getRemainingTime({
+        const updatedTime = getRemainingTime({
           ms: file.ttl,
           createdAt: new Date(file.uploadedAt),
         });
-
-        setRemainingTime(time ?? undefined);
+        setRemainingTime(updatedTime ?? undefined);
       }, 1000);
 
       return () => clearInterval(interval);
