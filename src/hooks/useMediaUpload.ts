@@ -1,4 +1,5 @@
 import React from "react";
+import CryptoJS from "crypto-js";
 
 import Api from "@/lib/api";
 import { MediaType, MediaUploadType } from "@/components/MediaUpload/schema";
@@ -6,10 +7,21 @@ import { toMilliseconds } from "@/utils/functions";
 
 import { useToast } from "./use-toast";
 
+const encryptionKey = process.env.ENCRYPTION_KEY ?? "";
+
 export default function useMediaUpload() {
   const [isLoading, setIsLoading] = React.useState(false);
 
   const { toast } = useToast();
+
+  const encryptFile = async (file: File) => {
+    const arrayBuffer = await file.arrayBuffer();
+    const wordArray = CryptoJS.lib.WordArray.create(arrayBuffer);
+    const encrypted = CryptoJS.AES.encrypt(wordArray, encryptionKey).toString();
+
+    // Convert encrypted data back to Blob
+    return new Blob([encrypted], { type: file.type });
+  };
 
   const transformBody = (body: MediaUploadType) => {
     if (body.maxDownloads) {
@@ -54,7 +66,8 @@ export default function useMediaUpload() {
         if (dataKey === "file") {
           const file = transformedData.file;
           if (file) {
-            formData.append("files", file);
+            const encryptedFile = await encryptFile(file);
+            formData.append("files", encryptedFile, file.name);
           }
         } else {
           const typedKey = dataKey as keyof typeof transformedData;
