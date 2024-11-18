@@ -75,6 +75,24 @@ export async function fetchFormData(
   }
 }
 
+const getFilename = (response: Response): string => {
+  let filename = "";
+
+  const disposition = response.headers.get("content-disposition");
+
+  if (disposition && disposition.indexOf("attachment") !== -1) {
+    const filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+
+    const matches = filenameRegex.exec(disposition);
+
+    if (matches != null && matches[1]) {
+      filename = matches[1].replace(/['"]/g, "");
+    }
+  }
+
+  return filename;
+};
+
 export async function fetchFile(
   ...args: [input: RequestInfo, init?: RequestInit]
 ) {
@@ -89,8 +107,6 @@ export async function fetchFile(
     console.log({ init });
 
     const response = await fetch(args[0], init);
-
-    console.log({ response });
 
     if (!response.ok) {
       const error: any = new Error(response.statusText);
@@ -128,6 +144,6 @@ export default class Api {
 
   public static async download(url: string) {
     const response = await fetchFile(`/api/${url}`);
-    return response;
+    return { response, fileName: getFilename(response) };
   }
 }

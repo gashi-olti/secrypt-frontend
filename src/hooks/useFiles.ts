@@ -49,13 +49,18 @@ export default function useFiles() {
   const downloadFile = async (id: string) => {
     setIsLoading(true);
     try {
-      const response = await Api.download(`files/download/${id}`);
+      const { response, fileName } = await Api.download(`files/download/${id}`);
 
       const data = await response.blob();
 
       if (!(data instanceof Blob)) return;
 
-      console.log({ data });
+      const link = document.createElement("a");
+      link.href = window.URL.createObjectURL(data);
+      link.download = fileName ? fileName : `export-${+new Date()}.doc`;
+      link.click();
+
+      setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
       throw error;

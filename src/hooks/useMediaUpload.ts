@@ -1,5 +1,5 @@
 import React from "react";
-import CryptoJS from "crypto-js";
+// import CryptoJS from "crypto-js";
 
 import Api from "@/lib/api";
 import { MediaType, MediaUploadType } from "@/components/MediaUpload/schema";
@@ -7,21 +7,21 @@ import { toMilliseconds } from "@/utils/functions";
 
 import { useToast } from "./use-toast";
 
-const encryptionKey = process.env.ENCRYPTION_KEY ?? "";
+// const encryptionKey = process.env.ENCRYPTION_KEY ?? "";
 
 export default function useMediaUpload() {
   const [isLoading, setIsLoading] = React.useState(false);
 
   const { toast } = useToast();
 
-  const encryptFile = async (file: File) => {
-    const arrayBuffer = await file.arrayBuffer();
-    const wordArray = CryptoJS.lib.WordArray.create(arrayBuffer);
-    const encrypted = CryptoJS.AES.encrypt(wordArray, encryptionKey).toString();
+  // const encryptFile = async (file: File) => {
+  //   const arrayBuffer = await file.arrayBuffer();
+  //   const wordArray = CryptoJS.lib.WordArray.create(arrayBuffer);
+  //   const encrypted = CryptoJS.AES.encrypt(wordArray, encryptionKey).toString();
 
-    // Convert encrypted data back to Blob
-    return new Blob([encrypted], { type: file.type });
-  };
+  //   // Convert encrypted data back to Blob
+  //   return new Blob([encrypted], { type: file.type });
+  // };
 
   const transformBody = (body: MediaUploadType) => {
     if (body.maxDownloads) {
@@ -35,20 +35,12 @@ export default function useMediaUpload() {
       });
     }
     if (body.fileType && body.file) {
-      if (body.file.type.includes("image")) {
-        body.fileType = MediaType.IMAGE;
-      }
-      if (
-        body.file.type.includes("audio") ||
-        body.file.type.includes("video")
-      ) {
-        body.fileType = MediaType.VIDEO;
-      }
-      if (body.file.type.includes("application")) {
-        body.fileType = MediaType.DOCUMENT;
-      }
-      if (body.file.type.includes("pdf")) {
-        body.fileType = MediaType.PDF;
+      if (body.file.type) {
+        const fileType = Object.entries(MediaType).find(
+          ([, value]) => value === body?.file?.type
+        );
+
+        body.fileType = fileType?.[0] ?? "DOC";
       }
     }
 
@@ -66,8 +58,8 @@ export default function useMediaUpload() {
         if (dataKey === "file") {
           const file = transformedData.file;
           if (file) {
-            const encryptedFile = await encryptFile(file);
-            formData.append("files", encryptedFile, file.name);
+            // const encryptedFile = await encryptFile(file);
+            formData.append("files", file, file.name);
           }
         } else {
           const typedKey = dataKey as keyof typeof transformedData;
