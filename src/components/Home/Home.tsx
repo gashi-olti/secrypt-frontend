@@ -7,11 +7,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import useMediaUpload from "@/hooks/useMediaUpload";
 
 import FileUploadSuccess from "./FileUploadSuccess";
-import schema, { MediaType, MediaUploadType } from "../MediaUpload/schema";
+import schema, { MediaUploadType } from "../MediaUpload/schema";
 import FileUpload from "./FileUpload";
 import FileUploadForm from "./FileUploadForm";
 import { Button } from "../ui/button";
 import Backdrop from "../Backdrop";
+import useFormErrors from "@/hooks/useFormErrors";
 
 export type ViewTypes = "upload" | "form" | "upload-success";
 
@@ -23,7 +24,7 @@ export default function Home() {
   const defaultValues = React.useMemo<MediaUploadType>(
     () => ({
       file: undefined,
-      fileType: MediaType.IMAGE,
+      fileType: "DOC",
       maxDownloads: "3",
       ttl: "2 minutes",
       password: "",
@@ -40,6 +41,8 @@ export default function Home() {
       defaultValues,
     });
 
+  const { handleErrors } = useFormErrors<MediaUploadType>();
+
   React.useEffect(() => {
     reset({ ...getValues(), ...defaultValues });
   }, [defaultValues, getValues, reset]);
@@ -55,7 +58,7 @@ export default function Home() {
         setView("upload-success");
       }
     } catch (err) {
-      console.log({ err });
+      handleErrors(err);
     }
   };
 

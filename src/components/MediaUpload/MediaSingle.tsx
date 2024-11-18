@@ -16,22 +16,22 @@ type Props = {
 
 export default function MediaSingle({
   accept = `
-    image/jpeg, 
-    image/png,
-    video/mp4,
-    audio/mpeg,
-    application/pdf,
-    application/msword,
-    application/vnd.openxmlformats-officedocument.wordprocessingml.document,
-    application/vnd.ms-excel,
-    application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,
-    application/vnd.ms-powerpoint,
-    application/vnd.openxmlformats-officedocument.presentationml.presentation,
-    application/zip,
-    application/x-7z-compressed,
-    application/x-rar-compressed,
-    application/x-tar,
-    application/x-zip-compressed`,
+  application/msword,
+  application/vnd.openxmlformats-officedocument.wordprocessingml.document,
+  image/jpg,
+  image/jpeg,
+  image/png,
+  image/gif,  
+  application/zip,
+  application/x-rar-compressed,
+  application/pdf,
+  video/mp4,
+  audio/mpeg,
+  video/quicktime,
+  video/x-msvideo,
+  video/x-matroska,
+  application/vnd.openxmlformats-officedocument.presentationml.presentation,
+  application/vnd.ms-excel`,
   name,
   disabled = false,
   setFile,
@@ -45,7 +45,7 @@ export default function MediaSingle({
     async (files: FileList) => {
       if (files.length) {
         const file = files[0];
-        const maxSize = 1.5 * 1024 * 1024 * 1024;
+        const maxSize = 2 * 1024 * 1024 * 1024;
 
         if (!fileTypes.includes(file?.type)) {
           toast({ description: "File type not allowed!" });

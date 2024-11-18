@@ -1,9 +1,10 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import tw from "twin.macro";
 import React from "react";
-import { CircleX, File } from "lucide-react";
+import Image from "next/image";
+import { CircleX } from "lucide-react";
 
-import { humanFileSize } from "@/utils/functions";
+import { humanFileSize, retrieveImage } from "@/utils/functions";
 import { useToast } from "@/hooks/use-toast";
 
 import {
@@ -17,6 +18,8 @@ import {
   AlertDialogTrigger,
 } from "../ui/alert-dialog";
 import { ViewTypes } from "../Home/Home";
+import { AspectRatio } from "../ui/aspect-ratio";
+import { MediaType } from "./schema";
 
 type Props = {
   file?: File;
@@ -25,7 +28,7 @@ type Props = {
 };
 
 export default function MediaItem({ file, setFile, setView }: Props) {
-  const { name, size = 0 } = file ?? {};
+  const { name, size = 0, type } = file ?? {};
 
   const { toast } = useToast();
 
@@ -43,9 +46,19 @@ export default function MediaItem({ file, setFile, setView }: Props) {
   return (
     <div tw="w-full h-full bg-gray-50 p-4 rounded-xl">
       <div tw="grid grid-cols-1 gap-4">
-        <div tw="p-4 flex flex-row justify-between items-center border-2 border-gray-200 rounded-lg">
+        <div tw="p-4 flex flex-row justify-between items-center border-b border-gray-200 shadow-sm rounded-lg">
           <h3 tw="text-2xl text-slate-700 font-semibold">1 file</h3>
-          <File tw="text-gray-400" />
+          <div tw="w-9 h-9">
+            <AspectRatio ratio={1 / 1}>
+              <Image
+                alt="image"
+                fill
+                src={retrieveImage({
+                  type: (type as MediaType) ?? MediaType.DOC,
+                })}
+              />
+            </AspectRatio>
+          </div>
         </div>
         <div tw="flex flex-row justify-between space-x-2">
           <div tw="flex flex-col line-clamp-1">

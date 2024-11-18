@@ -1,5 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import tw from "twin.macro";
+import "twin.macro";
 import Image from "next/image";
 
 import { useFile } from "./FileProvier";
@@ -17,7 +16,7 @@ export default function FileHero() {
           alt="image"
           fill
           src={retrieveImage({
-            type: (file?.fileType as MediaType) ?? MediaType.DOCUMENT,
+            type: (file?.fileType as MediaType) ?? MediaType.DOC,
           })}
         />
       </AspectRatio>

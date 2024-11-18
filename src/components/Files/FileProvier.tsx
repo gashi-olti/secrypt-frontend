@@ -36,16 +36,60 @@ export const FileProvider = ({ children }: FileProviderProps) => {
       backgroundColor: tw`bg-red-100`,
     },
     {
-      type: "DOCUMENT",
+      type: "DOC",
       backgroundColor: tw`bg-blue-100`,
     },
     {
-      type: "VIDEO",
+      type: "DOCX",
+      backgroundColor: tw`bg-blue-100`,
+    },
+    {
+      type: "GIF",
+      backgroundColor: tw`bg-orange-100`,
+    },
+    {
+      type: "JPG",
       backgroundColor: tw`bg-green-100`,
     },
     {
-      type: "IMAGE",
+      type: "PNG",
+      backgroundColor: tw`bg-blue-100`,
+    },
+    {
+      type: "ZIP",
+      backgroundColor: tw`bg-red-100`,
+    },
+    {
+      type: "RAR",
+      backgroundColor: tw`bg-violet-300`,
+    },
+    {
+      type: "MP4",
+      backgroundColor: tw`bg-violet-300`,
+    },
+    {
+      type: "MP3",
+      backgroundColor: tw`bg-red-100`,
+    },
+    {
+      type: "MOV",
+      backgroundColor: tw`bg-blue-100`,
+    },
+    {
+      type: "AVI",
       backgroundColor: tw`bg-orange-100`,
+    },
+    {
+      type: "MKV",
+      backgroundColor: tw`bg-violet-300`,
+    },
+    {
+      type: "PPT",
+      backgroundColor: tw`bg-red-100`,
+    },
+    {
+      type: "XSL",
+      backgroundColor: tw`bg-green-100`,
     },
   ];
 

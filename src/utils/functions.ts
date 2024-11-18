@@ -122,17 +122,53 @@ export function retrieveImage({ type }: { type: MediaType }) {
   let image = null;
 
   switch (type) {
-    case MediaType.IMAGE:
-      image = Images.ImageIcon;
-      break;
-    case MediaType.DOCUMENT:
+    case MediaType.DOC:
       image = Images.DocIcon;
       break;
-    case MediaType.VIDEO:
-      image = Images.VideoIcon;
+    case MediaType.DOCX:
+      image = Images.DocIcon;
       break;
     case MediaType.PDF:
       image = Images.PdfIcon;
+      break;
+    case MediaType.PPTX:
+      image = Images.PptIcon;
+      break;
+    case MediaType.XLSX:
+      image = Images.XslIcon;
+      break;
+    case MediaType.ZIP:
+      image = Images.ZipIcon;
+      break;
+    case MediaType.RAR:
+      image = Images.RarIcon;
+      break;
+    case MediaType.JPG:
+      image = Images.JpgIcon;
+      break;
+    case MediaType.JPEG:
+      image = Images.JpgIcon;
+      break;
+    case MediaType.PNG:
+      image = Images.PngIcon;
+      break;
+    case MediaType.GIF:
+      image = Images.GiffIcon;
+      break;
+    case MediaType.MP4:
+      image = Images.Mp4Icon;
+      break;
+    case MediaType.MP3:
+      image = Images.Mp3Icon;
+      break;
+    case MediaType.MOV:
+      image = Images.MovIcon;
+      break;
+    case MediaType.MKV:
+      image = Images.MkvIcon;
+      break;
+    case MediaType.AVI:
+      image = Images.AviIcon;
       break;
     default:
       image = Images.DocIcon;

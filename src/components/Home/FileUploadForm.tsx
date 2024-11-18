@@ -21,15 +21,15 @@ export default function FileUploadForm({
   children,
 }: Props) {
   return (
-    <div tw="max-w-screen-md mx-auto p-4 mt-12">
-      <div tw="grid grid-cols-12 md:(grid-cols-12) gap-4">
+    <div tw="max-w-screen-md mx-auto h-full flex flex-row justify-between items-center p-4 -mt-8">
+      <div tw="w-full grid grid-cols-12 md:(grid-cols-12) gap-4">
         <div tw="h-full col-span-12 md:(col-span-5)">
           <MediaItem file={file} setFile={setFile} setView={setView} />
         </div>
         <div tw="col-span-12 md:(col-span-7)">
           <div tw="w-full bg-gray-50 p-4 rounded-xl">
             <Tabs defaultValue="upload" tw="w-full">
-              <TabsList className="grid w-full grid-cols-2 bg-gray-200">
+              <TabsList className="grid w-full grid-cols-2 bg-gray-100">
                 <TabsTrigger
                   value="upload"
                   tw="bg-white! text-gray-600! shadow-xl"

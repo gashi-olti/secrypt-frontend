@@ -120,7 +120,7 @@ export default function DropZone({
           <CircleArrowUp />
         </Button>
         <h2 tw="text-3xl font-semibold text-slate-700">{`Drop like it's hot!`}</h2>
-        <p tw="text-gray-500">Up to 1.5GB</p>
+        <p tw="text-gray-500">Up to 2GB</p>
       </DropAreaInner>
       <input
         accept={accept}
