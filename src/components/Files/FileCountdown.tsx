@@ -1,10 +1,11 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import tw from "twin.macro";
-import React, { useEffect } from "react";
+import React from "react";
 
 import { getRemainingTime } from "@/utils/functions";
 
 import { useFile } from "./FileProvier";
+import { useRouter } from "next/router";
 
 type RemainingTime = {
   hours: string;
@@ -15,9 +16,11 @@ type RemainingTime = {
 export default function FileCountdown() {
   const [remainingTime, setRemainingTime] = React.useState<RemainingTime>();
 
+  const router = useRouter();
+
   const { file, fileStyle } = useFile();
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (file) {
       const time = getRemainingTime({
         ms: file.ttl,
@@ -30,12 +33,16 @@ export default function FileCountdown() {
           ms: file.ttl,
           createdAt: new Date(file.uploadedAt),
         });
+
+        if (!updatedTime) {
+          router.push("/");
+        }
         setRemainingTime(updatedTime ?? undefined);
       }, 1000);
 
       return () => clearInterval(interval);
     }
-  }, [file]);
+  }, [file, router]);
 
   return (
     <>
