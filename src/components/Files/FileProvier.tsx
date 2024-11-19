@@ -61,11 +61,11 @@ export const FileProvider = ({ children }: FileProviderProps) => {
     },
     {
       type: "RAR",
-      backgroundColor: tw`bg-violet-300`,
+      backgroundColor: tw`bg-violet-200`,
     },
     {
       type: "MP4",
-      backgroundColor: tw`bg-violet-300`,
+      backgroundColor: tw`bg-violet-200`,
     },
     {
       type: "MP3",
@@ -81,7 +81,7 @@ export const FileProvider = ({ children }: FileProviderProps) => {
     },
     {
       type: "MKV",
-      backgroundColor: tw`bg-violet-300`,
+      backgroundColor: tw`bg-violet-200`,
     },
     {
       type: "PPT",

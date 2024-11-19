@@ -118,56 +118,72 @@ export function getRemainingTime({
   };
 }
 
-export function retrieveImage({ type }: { type: MediaType }) {
+export function retrieveImage({ type }: { type: any }) {
   let image = null;
 
   switch (type) {
     case MediaType.DOC:
+    case "DOC":
       image = Images.DocIcon;
       break;
     case MediaType.DOCX:
+    case "DOCX":
       image = Images.DocIcon;
       break;
     case MediaType.PDF:
+    case "PDF":
       image = Images.PdfIcon;
       break;
     case MediaType.PPTX:
+    case "PPTX":
       image = Images.PptIcon;
       break;
     case MediaType.XLSX:
+    case "XLSX":
       image = Images.XslIcon;
       break;
     case MediaType.ZIP:
+    case "ZIP":
       image = Images.ZipIcon;
       break;
     case MediaType.RAR:
+    case "RAR":
       image = Images.RarIcon;
       break;
     case MediaType.JPG:
+    case "JPG":
       image = Images.JpgIcon;
       break;
     case MediaType.JPEG:
+    case "JPEG":
       image = Images.JpgIcon;
       break;
     case MediaType.PNG:
+    case "PNG":
       image = Images.PngIcon;
       break;
     case MediaType.GIF:
+    case "GIF":
       image = Images.GiffIcon;
       break;
     case MediaType.MP4:
+    case "MP4":
       image = Images.Mp4Icon;
       break;
     case MediaType.MP3:
+    case "MP3":
       image = Images.Mp3Icon;
       break;
     case MediaType.MOV:
+    case "MOV":
       image = Images.MovIcon;
       break;
     case MediaType.MKV:
+    case "MKV":
       image = Images.MkvIcon;
       break;
     case MediaType.AVI:
+    case "AVI":
       image = Images.AviIcon;
       break;
     default:
