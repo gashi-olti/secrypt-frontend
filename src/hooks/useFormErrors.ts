@@ -11,6 +11,7 @@ export default function useFormErrors<TFieldValues extends FieldValues>(
 
   const handleErrors = React.useCallback(
     (error: any) => {
+      console.log({ error });
       if (setError && field) {
         setError(field as any, {
           type: "manual",
