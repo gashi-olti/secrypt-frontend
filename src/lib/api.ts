@@ -36,12 +36,15 @@ export async function fetchFormData(
   body: FormData,
   headers?: any
 ) {
+  console.log({ url, body, headers });
   try {
     const response = await fetch(`/api/${url}`, {
       body,
       method: "POST",
       headers,
     });
+
+    console.log({ response });
 
     const contentType = response.headers.get("content-type");
 
