@@ -16,5 +16,8 @@ export const config = {
   api: {
     externalResolver: true,
     responseLimit: false,
+    bodyParser: {
+      sizeLimit: "2000mb",
+    },
   },
 };
