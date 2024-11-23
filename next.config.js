@@ -14,9 +14,4 @@ export default withTwin({
 
     return config;
   },
-  api: {
-    bodyParser: {
-      sizeLimit: "2000mb",
-    },
-  },
 });
